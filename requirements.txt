@@ -1,0 +1,5 @@
+gunicorn
+flask
+argon2-cffi
+passlib
+boto3
