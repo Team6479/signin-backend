@@ -17,7 +17,7 @@ def home():
 
 @app.route('/api', methods=['GET', 'POST'])
 def version():
-    return '0.0.1'
+    return '0.1'
 
 @app.route('/api/get/user', methods=['POST'])
 def get_user_data():
