@@ -38,6 +38,7 @@ def make_user():
         abort(409)
     else:
         aws.create_user(id, request.form['name'])
+        abort(200)
 
 @app.route('/api/put/entry', methods=['POST'])
 def push_entry():
@@ -45,3 +46,4 @@ def push_entry():
     start = int(request.form['start'])
     end = int(request.form['end'])
     aws.push_entry(id, start, end)
+    abort(200)
