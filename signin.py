@@ -2,14 +2,9 @@ from flask import Flask, request, redirect, session, abort
 import json
 import os
 import json
-import dummy_aws as aws
+import aws
 
 app = Flask(__name__)
-
-try:
-    os.makedirs('data/users')
-except:
-    print('Data directory already exists, skipping')
 
 # I acknowledge the downsides of this line
 app.secret_key = os.urandom(16)
