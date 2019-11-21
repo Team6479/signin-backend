@@ -1,6 +1,7 @@
 import boto3
 import os
 import time
+from decimal import Decimal
 
 aws = boto3.Session(
     aws_access_key_id=os.environ['AWS_KEY_ID'],

@@ -3,6 +3,7 @@ import json
 import os
 import json
 import aws
+from decimal import Decimal
 
 app = Flask(__name__)
 
