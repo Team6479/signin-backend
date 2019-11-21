@@ -1,5 +1,6 @@
 import boto3
 import os
+import time
 
 aws = boto3.Session(
     aws_access_key_id=os.environ['AWS_KEY_ID'],
@@ -33,4 +34,3 @@ def push_entry(id: int, start: int, end: int):
         'end': end,
         'duration': (end - start)
     })
-    log('[' + time.strftime('%Y-%m-%d', time.localtime(start)) + '] ' + str(id) + ' from ' + str(start) + '-' + str(end) + ' (' + str(end - start) + 's)')
