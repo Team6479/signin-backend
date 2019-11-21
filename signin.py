@@ -17,7 +17,7 @@ def home():
 def version():
     return '0.0.1'
 
-@app.route('/api/get/user', method='POST')
+@app.route('/api/get/user')
 def get_user_data():
     id = int(request.form['id'])
     data = aws.get_user_data(id)
@@ -26,7 +26,7 @@ def get_user_data():
     else:
         abort(404)
 
-@app.route('/api/put/user', method='POST')
+@app.route('/api/put/user')
 def make_user():
     id = int(request.form['id'])
     if aws.get_user_data(id):
@@ -34,7 +34,7 @@ def make_user():
     else:
         aws.create_user(id, request.form['name'])
 
-@app.route('/api/put/entry', method='POST')
+@app.route('/api/put/entry')
 def push_entry():
     id = int(request.form['id'])
     start = int(request.form['start'])
