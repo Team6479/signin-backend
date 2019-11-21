@@ -13,11 +13,11 @@ app.secret_key = os.urandom(16)
 def home():
     return '6749'
 
-@app.route('/api')
+@app.route('/api', methods=['GET', 'POST'])
 def version():
     return '0.0.1'
 
-@app.route('/api/get/user')
+@app.route('/api/get/user', methods=['POST'])
 def get_user_data():
     id = int(request.form['id'])
     data = aws.get_user_data(id)
@@ -26,7 +26,7 @@ def get_user_data():
     else:
         abort(404)
 
-@app.route('/api/put/user')
+@app.route('/api/put/user', methods=['POST'])
 def make_user():
     id = int(request.form['id'])
     if aws.get_user_data(id):
@@ -34,7 +34,7 @@ def make_user():
     else:
         aws.create_user(id, request.form['name'])
 
-@app.route('/api/put/entry')
+@app.route('/api/put/entry', methods=['POST'])
 def push_entry():
     id = int(request.form['id'])
     start = int(request.form['start'])
