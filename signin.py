@@ -22,6 +22,11 @@ def home():
 def version():
     return '0.0.1'
 
+# Technically, this is a horrible idea
+@app.route('/api/dump_log', methods=['GET', 'POST'])
+def dump_log():
+    return aws.get_log()
+
 @app.route('/api/get/user', methods=['POST'])
 def get_user_data():
     id = int(request.form['id'])

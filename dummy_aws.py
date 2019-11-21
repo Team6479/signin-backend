@@ -5,6 +5,10 @@ def log(msg: str, fname: str = 'data/dummy_server_log'):
         logfile.write(msg + '\n')
         print(msg)
 
+def get_log(fname: str = 'data/dummy_server_log') -> str:
+    with open(fname, 'r') as logfile:
+        return logfile.read()
+
 def get_user_data(id: int):
     try:
         with open('data/users/' + str(id), 'r') as userfile:
