@@ -1,9 +1,8 @@
 from flask import Flask, request, redirect, session, abort
 import json
 import os
-import json
+import dynamo_json as json
 import aws
-from decimal import Decimal
 
 app = Flask(__name__)
 
