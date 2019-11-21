@@ -3,6 +3,7 @@ import time
 def log(msg: str, fname: str = 'data/dummy_server_log'):
     with open(fname, 'a') as logfile:
         logfile.write(msg + '\n')
+        print(msg)
 
 def get_user_data(id: int):
     try:
@@ -17,6 +18,7 @@ def get_user_data(id: int):
 def create_user(id: int, name: str):
     with open('data/users/' + str(id), 'x') as userfile:
         userfile.write(name)
+        print(str(id) + ' = ' + name)
 
 def push_entry(id: int, start: int, end: int):
     log('[' + time.strftime('%Y-%m-%d', time.localtime(start)) + '] ' + str(id) + ' from ' + str(start) + '-' + str(end) + ' (' + str(end - start) + 's)')
