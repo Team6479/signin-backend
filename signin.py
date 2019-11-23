@@ -22,6 +22,7 @@ def version():
 @app.route('/api/get/user', methods=['POST'])
 def get_user_data():
     if not request.form['key'] in API_KEYS:
+        print('Invalid API key: ' + request.form['key'])
         abort(401)
     id = int(request.form['id'])
     data = aws.get_user_data(id)
@@ -33,6 +34,7 @@ def get_user_data():
 @app.route('/api/put/user', methods=['POST'])
 def make_user():
     if not request.form['key'] in API_KEYS:
+        print('Invalid API key: ' + request.form['key'])
         abort(401)
     id = int(request.form['id'])
     if aws.get_user_data(id):
@@ -44,6 +46,7 @@ def make_user():
 @app.route('/api/put/entry', methods=['POST'])
 def push_entry():
     if not request.form['key'] in API_KEYS:
+        print('Invalid API key: ' + request.form['key'])
         abort(401)
     id = int(request.form['id'])
     start = int(request.form['start'])
