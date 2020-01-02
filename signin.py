@@ -65,3 +65,11 @@ def push_entry():
     end = int(request.form['end'])
     aws.push_entry(id, start, end)
     return str(id)
+
+@app.route('/api/get/entries', methods=['POST'])
+def push_entry():
+    if not request.form['key'] in API_KEYS:
+        print('Invalid API key: ' + request.form['key'])
+        abort(401)
+    id = int(request.form['id'])
+    return json.dumps(aws.get_entries(id))

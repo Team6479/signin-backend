@@ -1,4 +1,5 @@
 import boto3
+from boto3.dynamodb.conditions import Key, Attr
 import os
 import time
 
@@ -34,3 +35,5 @@ def push_entry(id: int, start: int, end: int):
         'end': end,
         'duration': (end - start)
     })
+def get_entries(id: int):
+    return entries.query(KeyConditionExpression=Key('id').eq(id))['Items']
