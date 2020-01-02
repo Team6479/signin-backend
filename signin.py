@@ -19,6 +19,10 @@ def home():
 def version():
     return '0.1'
 
+@app.route('/api/ping', methods=['GET', 'POST'])
+def ping():
+    return 'ping'
+
 @app.route('/api/get/user', methods=['POST'])
 def get_user_data():
     if not request.form['key'] in API_KEYS:
