@@ -25,7 +25,6 @@ def ping():
 
 @app.route('/api/key/check', methods=['POST'])
 def check_key():
-    print(json.dumps(request.form))
     if not request.form['key'] in API_KEYS:
         return 'false', 401
     else:
