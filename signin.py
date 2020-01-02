@@ -23,6 +23,14 @@ def version():
 def ping():
     return 'ping'
 
+@app.route('/api/key/check', methods=['POST'])
+def check_key():
+    if not request.form['key'] in API_KEYS:
+        print('false')
+        abort(401)
+    else:
+        return 'true'
+
 @app.route('/api/get/user', methods=['POST'])
 def get_user_data():
     if not request.form['key'] in API_KEYS:
