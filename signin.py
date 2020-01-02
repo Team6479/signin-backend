@@ -67,7 +67,7 @@ def push_entry():
     return str(id)
 
 @app.route('/api/get/entries', methods=['POST'])
-def push_entry():
+def get_entries():
     if not request.form['key'] in API_KEYS:
         print('Invalid API key: ' + request.form['key'])
         abort(401)
