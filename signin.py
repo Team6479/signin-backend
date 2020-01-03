@@ -1,8 +1,9 @@
-from flask import Flask, request, redirect, session, abort
+from flask import Flask, request, redirect, session, abort, render_template
 import json
 import os
 import dynamo_json as json
 import aws
+import util
 
 app = Flask(__name__)
 
@@ -13,7 +14,30 @@ API_KEYS = os.environ['API_KEYS'].split(':')
 
 @app.route('/')
 def home():
-    return '6749'
+    return redirect('/login', code=301)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/user')
+def login():
+    if not request.form['key'] in API_KEYS:
+        print('Invalid API key: ' + request.form['key'])
+        abort(401)
+    id = int(request.form['id'])
+    data = aws.get_user_data(id)
+    if data:
+        return json.dumps(data)
+    else:
+        abort(404)
+    entries = aws.get_entries(id)
+    table = ''
+    secs = 0
+    for entry in entries:
+        secs += entry['duration']
+        table += '<tr><th scope="row">' + entry['date'] + '</th><td>' + util.fsec(entry['duration']) + '</td><td>' + util.ftime_from_date(entry['start']) + '</td><td>' + util.ftime_from_date(entry['end']) + '</td></tr>'
+    return render_template("user.html", id=id, name=data['name'], table=table, time=util.fsec(secs), secs=secs)
 
 @app.route('/api', methods=['GET', 'POST'])
 def version():

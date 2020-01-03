@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#563d7c">
+    <title>User Data - {{ id }} | Signin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>.green{color:green;}.red{color:red;}</style>
+  </head>
+  <body>
+    <div>ID: {{ id }}</div>
+    <div>Name: {{ name }}</div>
+    <div>Total time: <span class="{% if secs>108000 %}green{% else %}red{% endif %}">{{ time }}</span></div>
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ table }}
+      </tbody>
+    </table>
+  </body>
+</html>
