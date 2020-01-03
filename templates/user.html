@@ -23,7 +23,14 @@
         </tr>
       </thead>
       <tbody>
-        {{ table }}
+        {% for row in table_data %}
+          <tr>
+            <th scope="row"> {{ row[0] }} </th>
+            <td> {{ row[1] }} </td>
+            <td> {{ row[2] }} </td>
+            <td> {{ row[3] }} </td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
   </body>

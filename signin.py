@@ -29,12 +29,12 @@ def user():
     data = aws.get_user_data(id)
     if data:
         entries = aws.get_entries(id)
-        table = ''
+        table_data = []
         secs = 0
         for entry in entries:
             secs += entry['duration']
-            table += '<tr><th scope="row">' + entry['date'] + '</th><td>' + util.fsec(entry['duration']) + '</td><td>' + util.ftime_from_date(entry['start']) + '</td><td>' + util.ftime_from_date(entry['end']) + '</td></tr>'
-        return render_template("user.html", id=id, name=data['name'], table=table, time=util.fsec(secs), secs=secs)
+            table_data.append([entry['date'], util.fsec(entry['duration']), util.ftime_from_date(entry['start']), util.ftime_from_date(entry['end'])])
+        return render_template("user.html", id=id, name=data['name'], table_data=table_data, time=util.fsec(secs), secs=secs)
     else:
         abort(404)
 
