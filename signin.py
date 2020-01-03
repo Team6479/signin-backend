@@ -17,7 +17,7 @@ def home():
 
 @app.route('/api', methods=['GET', 'POST'])
 def version():
-    return '0.1'
+    return '0.2'
 
 @app.route('/api/ping', methods=['GET', 'POST'])
 def ping():
