@@ -11,6 +11,7 @@ argon2-cffi = "*"
 passlib = "*"
 boto3 = "*"
 Flask = "*"
+pytz = "*"
 
 [requires]
 python_version = "3.7"
