@@ -10,7 +10,7 @@ aws = boto3.Session(
 )
 dynamodb = aws.resource('dynamodb')
 
-entries = dynamodb.Table('6479-signin-entries')
+entries = dynamodb.Table('6479-signin-sessions')
 users = dynamodb.Table('6479-signin-users')
 
 def get_user_data(id: int):
