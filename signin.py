@@ -28,16 +28,15 @@ def user():
     id = int(request.form['id'])
     data = aws.get_user_data(id)
     if data:
-        return json.dumps(data)
+        entries = aws.get_entries(id)
+        table = ''
+        secs = 0
+        for entry in entries:
+            secs += entry['duration']
+            table += '<tr><th scope="row">' + entry['date'] + '</th><td>' + util.fsec(entry['duration']) + '</td><td>' + util.ftime_from_date(entry['start']) + '</td><td>' + util.ftime_from_date(entry['end']) + '</td></tr>'
+        return render_template("user.html", id=id, name=data['name'], table=table, time=util.fsec(secs), secs=secs)
     else:
         abort(404)
-    entries = aws.get_entries(id)
-    table = ''
-    secs = 0
-    for entry in entries:
-        secs += entry['duration']
-        table += '<tr><th scope="row">' + entry['date'] + '</th><td>' + util.fsec(entry['duration']) + '</td><td>' + util.ftime_from_date(entry['start']) + '</td><td>' + util.ftime_from_date(entry['end']) + '</td></tr>'
-    return render_template("user.html", id=id, name=data['name'], table=table, time=util.fsec(secs), secs=secs)
 
 @app.route('/api', methods=['GET', 'POST'])
 def version():
