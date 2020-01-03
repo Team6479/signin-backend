@@ -16,11 +16,11 @@ API_KEYS = os.environ['API_KEYS'].split(':')
 def home():
     return redirect('/login', code=301)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
 
-@app.route('/user')
+@app.route('/user', methods=['GET', 'POST'])
 def user():
     if not request.form['key'] in API_KEYS:
         print('Invalid API key: ' + request.form['key'])
