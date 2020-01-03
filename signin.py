@@ -21,7 +21,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/user')
-def login():
+def user():
     if not request.form['key'] in API_KEYS:
         print('Invalid API key: ' + request.form['key'])
         abort(401)
