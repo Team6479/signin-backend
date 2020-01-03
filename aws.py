@@ -10,7 +10,7 @@ aws = boto3.Session(
 )
 dynamodb = aws.resource('dynamodb')
 
-entries = dynamodb.Table('6479-signin-times')
+entries = dynamodb.Table('6479-signin-entries')
 users = dynamodb.Table('6479-signin-users')
 
 def get_user_data(id: int):
@@ -30,10 +30,8 @@ def create_user(id: int, name: str):
 def push_entry(id: int, start: int, end: int):
     entries.put_item(Item={
         'id': id,
-        'date': time.strftime('%Y-%m-%d', time.localtime(start)),
         'start': start,
-        'end': end,
-        'duration': (end - start)
+        'end': end
     })
 def get_entries(id: int):
     return entries.query(KeyConditionExpression=Key('id').eq(id))['Items']

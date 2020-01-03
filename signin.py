@@ -32,8 +32,8 @@ def user():
         table_data = []
         secs = 0
         for entry in entries:
-            secs += entry['duration']
-            table_data.append([entry['date'], util.fsec(entry['duration']), util.ftime_from_date(entry['start']), util.ftime_from_date(entry['end'])])
+            secs += entry['end'] - entry['start']
+            table_data.append([util.fdate_from_dt(entry['start']), util.fsec(entry['end'] - entry['start']), util.ftime_from_date(entry['start']), util.ftime_from_date(entry['end'])])
         return render_template("user.html", id=id, name=data['name'], table_data=table_data, time=util.fsec(secs), secs=secs)
     else:
         abort(404)
