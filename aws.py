@@ -13,11 +13,33 @@ dynamodb = aws.resource('dynamodb')
 entries = dynamodb.Table('6479-signin-sessions')
 users = dynamodb.Table('6479-signin-users')
 
+def get_all_users():
+    users = table.scan()
+    while 'LastEvaluatedKey' in response:
+        map(users.append, table.scan(ExclusiveStartKey=response['LastEvaluatedKey']))
+    return users
+
+def get_all_users_long():
+    users = get_all_users()
+    for user in users:
+        user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(id)))
+    return users
+
 def get_user_data(id: int):
     try:
         return users.get_item(Key={
             'id': id
         })['Item']
+    except:
+        return None
+
+def get_user_data_long(id: int):
+    try:
+        user = users.get_item(Key={
+            'id': id
+        })['Item']
+        user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(id)))
+        return user
     except:
         return None
 
