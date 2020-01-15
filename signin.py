@@ -36,7 +36,7 @@ def user():
             table_data.append([util.fdate_from_dt(entry['start']), util.fsec(entry['end'] - entry['start']), util.ftime_from_dt(entry['start']), util.ftime_from_dt(entry['end'])])
         leaderboard = []
         for user in aws.get_all_users_long():
-            leaderboard.append([user['name'], user['id'], fsec(user['time'])])
+            leaderboard.append([user['name'], user['id'], util.fsec(user['time'])])
         leaderboard.sort(key=(lambda user: user[2]), reverse=True)
         return render_template("user.html", id=id, name=data['name'], table_data=table_data, leaderboard=leaderboard[:10], time=util.fsec(secs), secs=secs)
     else:
