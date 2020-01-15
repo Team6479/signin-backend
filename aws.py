@@ -23,7 +23,7 @@ def get_all_users():
 def get_all_users_long():
     userlist = get_all_users()
     for user in userlist:
-        user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(id)))
+        user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(user['id'])))
     return userlist
 
 def get_user_data(id: int):
