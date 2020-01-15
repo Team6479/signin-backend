@@ -14,16 +14,16 @@ entries = dynamodb.Table('6479-signin-sessions')
 users = dynamodb.Table('6479-signin-users')
 
 def get_all_users():
-    users = table.scan()
+    userlist = users.scan()
     while 'LastEvaluatedKey' in response:
-        map(users.append, table.scan(ExclusiveStartKey=response['LastEvaluatedKey']))
+        map(userlist.append, users.scan(ExclusiveStartKey=response['LastEvaluatedKey']))
     return users
 
 def get_all_users_long():
-    users = get_all_users()
-    for user in users:
+    userlist = get_all_users()
+    for user in userlist:
         user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(id)))
-    return users
+    return userlist
 
 def get_user_data(id: int):
     try:
