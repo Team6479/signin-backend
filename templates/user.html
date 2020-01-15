@@ -49,7 +49,7 @@
             <th scope="row"> {{ loop.index }} </th>
             <td> {{ row[0] }} </td>
             <td> {{ row[1] }} </td>
-            <td> {{ row[2] }} </td>
+            <td class="{% if row[3]>108000 %}green{% else %}red{% endif %}"> {{ row[2] }} </td>
           </tr>
         {% endfor %}
       </tbody>
