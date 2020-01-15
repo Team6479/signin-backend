@@ -17,16 +17,15 @@ users = dynamodb.Table('6479-signin-users')
 def get_all_users():
     response = users.scan()
     userlist = response['Items']
-    print(json.dumps(userlist))
     while 'LastEvaluatedKey' in response:
         map(userlist.append, users.scan(ExclusiveStartKey=response['LastEvaluatedKey']))
-    print(json.dumps(userlist))
     return userlist
 
 def get_all_users_long():
     userlist = get_all_users()
     for user in userlist:
         user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(user['id'])))
+    print(json.dumps(userlist))
     return userlist
 
 def get_user_data(id: int):
