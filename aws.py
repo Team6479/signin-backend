@@ -19,7 +19,8 @@ def get_all_users():
     userlist = response['Items']
     while 'LastEvaluatedKey' in response:
         response = users.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-        for user in response['Items']
+        for user in response['Items']:
+            userlist.append(user)
     return userlist
 
 def get_all_users_long():
