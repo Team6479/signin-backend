@@ -14,7 +14,8 @@ entries = dynamodb.Table('6479-signin-sessions')
 users = dynamodb.Table('6479-signin-users')
 
 def get_all_users():
-    userlist = users.scan()
+    response = users.scan()
+    userlist = response['Items']
     while 'LastEvaluatedKey' in response:
         map(userlist.append, users.scan(ExclusiveStartKey=response['LastEvaluatedKey']))
     return users
