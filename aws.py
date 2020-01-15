@@ -23,7 +23,6 @@ def get_all_users_long():
     users = get_all_users()
     for user in users:
         user['time'] = sum(map((lambda e: e['end'] - e['start']), get_entries(id)))
-    print(json.dumps(users))
     return users
 
 def get_user_data(id: int):
