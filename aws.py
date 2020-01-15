@@ -2,6 +2,7 @@ import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import os
 import time
+import dynamo_json as json
 
 aws = boto3.Session(
     aws_access_key_id=os.environ['AWS_KEY_ID'],
