@@ -38,7 +38,7 @@ def user():
         for user in aws.get_all_users_long():
             leaderboard.append([user['name'], user['id'], util.fsec(user['time']), user['time']])
         leaderboard.sort(key=(lambda user: user[3]), reverse=True) # sort by time, greatest to least
-        return render_template("user.html", id=id, name=data['name'], table_data=table_data, leaderboard=leaderboard[:10], time=util.fsec(secs), secs=secs)
+        return render_template("user.html", id=id, name=data['name'], table_data=table_data, leaderboard=leaderboard, time=util.fsec(secs), secs=secs)
     else:
         abort(404)
 
